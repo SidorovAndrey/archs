@@ -2,10 +2,27 @@
 
 #include "Game.hpp"
 
+Game::Game() {
+    player_ = new Player("resources/mario.png");
+}
+
+Game::~Game() {
+    delete player_;
+}
+
 void Game::Run() {
+    sf::Texture texture;
+    if (!texture.loadFromFile(player_->getTextureLocation())) {
+        throw std::exception();
+    }
+
+    sf::Sprite sprite;
+    sprite.setPosition(player_->xPos(), player_->yPos());
+    sprite.setTexture(texture);
+    sprite.setScale(0.2f, 0.2f);
+    sprite.setTextureRect(sf::IntRect(0, 0, 800, 800));
+
     sf::RenderWindow window(sf::VideoMode(1024, 700), "archs");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Cyan);
 
     while (window.isOpen()) {
         sf::Event event;
@@ -15,15 +32,17 @@ void Game::Run() {
 
             if (event.type == sf::Event::KeyPressed) {
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-                    shape.move(1.f, 0.f);
+                    player_->handleInput(Direciton::Right);
 
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-                    shape.move(-1.f, 0.f);
+                    player_->handleInput(Direciton::Left);
+
+                sprite.setPosition(player_->xPos(), player_->yPos());
             }
         }
 
         window.clear();
-        window.draw(shape);
+        window.draw(sprite);
         window.display();
     }
 }
