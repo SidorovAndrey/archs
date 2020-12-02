@@ -3,7 +3,7 @@
 #include "Game.hpp"
 
 Game::Game() {
-    player_ = new Player("resources/mario.png");
+    player_ = new Player("resources/mario.png", this);
 }
 
 Game::~Game() {
@@ -19,12 +19,13 @@ void Game::Run() {
     sf::Sprite sprite;
     sprite.setPosition(player_->xPos(), player_->yPos());
     sprite.setTexture(texture);
-    sprite.setScale(0.2f, 0.2f);
+    sprite.setScale(0.05f, 0.05f);
     sprite.setTextureRect(sf::IntRect(0, 0, 800, 800));
 
     sf::RenderWindow window(sf::VideoMode(1024, 700), "archs");
 
     while (window.isOpen()) {
+
         sf::Event event;
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
@@ -32,14 +33,19 @@ void Game::Run() {
 
             if (event.type == sf::Event::KeyPressed) {
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-                    player_->handleInput(Direciton::Right);
+                    player_->moveRight();
 
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-                    player_->handleInput(Direciton::Left);
+                    player_->moveLeft();
 
-                sprite.setPosition(player_->xPos(), player_->yPos());
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+                    player_->jump();
+
             }
         }
+
+        player_->tick();
+        sprite.setPosition(player_->xPos(), player_->yPos());
 
         window.clear();
         window.draw(sprite);

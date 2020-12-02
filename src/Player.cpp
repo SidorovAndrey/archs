@@ -1,28 +1,58 @@
 #include "Player.hpp"
+#include "Game.hpp"
 
-Player::Player(std::string texture_location) {
-    x_ = 0.f;
-    y_ = 0.f;
+#include "Log.hpp"
+
+Player::Player(std::string texture_location, const Game* game) {
+    height_ = 30;
+    width_ = 30;
+    x_ = 5;
+    y_ = game->y_screen_size - height_ - 20;
+
+    x_velocity_ = 0;
+    y_velocity_ = 0;
 
     texture_location_ = texture_location;
 }
 
-void Player::handleInput(const Direciton direction) noexcept {
-    if (direction == Direciton::Left)
-        x_ -= 5.f;
+void Player::tick() noexcept {
+    if (x_velocity_ != 0) {
+        x_velocity_ = 0;
+    }
 
-    if (direction == Direciton::Right)
-        x_ += 5.f;
+    x_ += x_velocity_;
+    y_ += y_velocity_;
+    if (y_velocity_ > 0) y_velocity_ -= 3;
+}
+
+void Player::moveLeft() noexcept {
+    x_velocity_ = -10;
+}
+
+void Player::moveRight() noexcept {
+    x_velocity_ = 10;
+}
+
+void Player::jump() noexcept {
+    y_velocity_ = 10;
 }
 
 std::string Player::getTextureLocation() const noexcept {
     return texture_location_;
 }
 
-float Player::xPos() const noexcept {
+int Player::height() const noexcept {
+    return height_;
+}
+
+int Player::width() const noexcept {
+    return width_;
+}
+
+int Player::xPos() const noexcept {
     return x_;
 }
 
-float Player::yPos() const noexcept {
+int Player::yPos() const noexcept {
     return y_;
 }

@@ -3,22 +3,32 @@
 
 #include <string>
 
-#include "Direction.hpp"
+class Game;
 
 class Player {
     private:
-        float x_, y_;
+        int height_, width_;
+        int x_, y_;
+        double x_velocity_, y_velocity_;
+
         std::string texture_location_;
 
     public:
-        Player(std::string texture_location);
+        Player(std::string texture_location, const Game* game);
         ~Player() = default;
 
-        void handleInput(const Direciton direction) noexcept;
+        void tick() noexcept;
+
+        void moveLeft() noexcept;
+        void moveRight() noexcept;
+        void jump() noexcept;
 
         std::string getTextureLocation() const noexcept;
-        float xPos() const noexcept;
-        float yPos() const noexcept;
+
+        int height() const noexcept;
+        int width() const noexcept;
+        int xPos() const noexcept;
+        int yPos() const noexcept;
 };
 
 #endif // PLAYER_H_
