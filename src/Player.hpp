@@ -3,14 +3,13 @@
 
 #include <string>
 
+#include "GameObject.hpp"
+
 class Game;
 
-class Player {
+class Player : public GameObject {
     private:
-        int height_, width_;
-        int x_, y_;
-        double x_velocity_, y_velocity_;
-
+        sf::Vector2f velocity_;
         std::string texture_location_;
 
     public:
@@ -24,11 +23,6 @@ class Player {
         void jump() noexcept;
 
         std::string getTextureLocation() const noexcept;
-
-        int height() const noexcept;
-        int width() const noexcept;
-        int xPos() const noexcept;
-        int yPos() const noexcept;
 };
 
 #endif // PLAYER_H_

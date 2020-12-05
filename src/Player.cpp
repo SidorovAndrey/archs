@@ -3,56 +3,36 @@
 
 #include "Log.hpp"
 
-Player::Player(std::string texture_location, const Game* game) {
-    height_ = 30;
-    width_ = 30;
-    x_ = 5;
-    y_ = game->y_screen_size - height_ - 20;
+Player::Player(std::string texture_location, const Game* game)
+    : GameObject(GameObjectType::Player, 5, game->y_screen_size - 50, 30, 30) {
 
-    x_velocity_ = 0;
-    y_velocity_ = 0;
-
+    velocity_ = sf::Vector2f(0, 0);
     texture_location_ = texture_location;
 }
 
 void Player::tick() noexcept {
-    if (x_velocity_ != 0) {
-        x_velocity_ = 0;
-    }
+    auto position = this->getPosition();
+    position += velocity_;
+    setPosition(position);
 
-    x_ += x_velocity_;
-    y_ += y_velocity_;
-    if (y_velocity_ > 0) y_velocity_ -= 3;
+    if (velocity_.x != 0) {
+        velocity_.x = 0;
+    }
 }
 
 void Player::moveLeft() noexcept {
-    x_velocity_ = -10;
+    velocity_.x = -10;
 }
 
 void Player::moveRight() noexcept {
-    x_velocity_ = 10;
+    velocity_.x = 10;
 }
 
 void Player::jump() noexcept {
-    y_velocity_ = 10;
+    // TODO: implement
 }
 
 std::string Player::getTextureLocation() const noexcept {
     return texture_location_;
 }
 
-int Player::height() const noexcept {
-    return height_;
-}
-
-int Player::width() const noexcept {
-    return width_;
-}
-
-int Player::xPos() const noexcept {
-    return x_;
-}
-
-int Player::yPos() const noexcept {
-    return y_;
-}

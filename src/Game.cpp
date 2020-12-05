@@ -4,20 +4,26 @@
 
 Game::Game() {
     player_ = new Player("resources/mario.png", this);
+    config_ = new Config();
 }
 
 Game::~Game() {
     delete player_;
+    delete[] game_objects_;
+    delete config_;
 }
 
 void Game::Run() {
+    config_->load("resources/game.config");
+    // TODO: use config values for player and ground sizes, add map parsing
+
     sf::Texture texture;
     if (!texture.loadFromFile(player_->getTextureLocation())) {
         throw std::exception();
     }
 
     sf::Sprite sprite;
-    sprite.setPosition(player_->xPos(), player_->yPos());
+    sprite.setPosition(player_->getPosition());
     sprite.setTexture(texture);
     sprite.setScale(0.05f, 0.05f);
     sprite.setTextureRect(sf::IntRect(0, 0, 800, 800));
@@ -45,7 +51,7 @@ void Game::Run() {
         }
 
         player_->tick();
-        sprite.setPosition(player_->xPos(), player_->yPos());
+        sprite.setPosition(player_->getPosition());
 
         window.clear();
         window.draw(sprite);
