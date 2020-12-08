@@ -4,13 +4,11 @@
 #include <vector>
 
 #include "Config.hpp"
-#include "GameObject.hpp"
-#include "Player.hpp"
+#include "GameMap.hpp"
 
 class Game {
     private:
-        Player* player_;
-        std::vector<GameObject>* game_objects_;
+        GameMap* game_map_;
         Config* config_;
 
     public:

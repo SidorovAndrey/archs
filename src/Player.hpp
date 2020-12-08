@@ -13,16 +13,16 @@ class Player : public GameObject {
         std::string texture_location_;
 
     public:
-        Player(std::string texture_location, const Game* game);
+        Player(const std::string texture_location, const sf::Vector2f position, const sf::Vector2f size);
         ~Player() = default;
 
-        void tick() noexcept;
+        void Tick() noexcept;
 
-        void moveLeft() noexcept;
-        void moveRight() noexcept;
-        void jump() noexcept;
+        void MoveLeft() noexcept;
+        void MoveRight() noexcept;
+        void Jump() noexcept;
 
-        std::string getTextureLocation() const noexcept;
+        std::string GetTextureLocation() const noexcept;
 };
 
 #endif // PLAYER_H_

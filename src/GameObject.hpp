@@ -13,16 +13,15 @@ class GameObject {
         GameObjectType object_type_;
 
     public:
-        GameObject(GameObjectType type);
-        GameObject(GameObjectType type, float x, float y, float width, float height);
+        GameObject(const GameObjectType type, const sf::Vector2f position, const sf::Vector2f size);
 
-        void setType(GameObjectType type) noexcept;
+        void SetType(GameObjectType type) noexcept;
 
-        sf::Vector2f getPosition() const noexcept;
-        sf::Vector2f getSize() const noexcept;
+        sf::Vector2f GetPosition() const noexcept;
+        sf::Vector2f GetSize() const noexcept;
 
-        void setPosition(const sf::Vector2f& position) noexcept;
-        void setSize(const sf::Vector2f& size) noexcept;
+        void SetPosition(const sf::Vector2f& position) noexcept;
+        void SetSize(const sf::Vector2f& size) noexcept;
 };
 
 #endif // GAME_OBJECT_H_

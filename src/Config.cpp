@@ -4,7 +4,7 @@
 #include "Config.hpp"
 #include "Log.hpp"
 
-void Config::load(const std::string& file_path) {
+void Config::Load(const std::string& file_path) {
     delete values_;
     values_ = new std::map<std::string, std::string>();
 
@@ -35,7 +35,7 @@ std::string Config::operator[](const std::string& key) const {
     return value;
 }
 
-int Config::getInt(const std::string& key) const {
+int Config::GetInt(const std::string& key) const {
     std::string value = (*this)[key];
     return std::stoi(value);
 }

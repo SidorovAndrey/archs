@@ -13,9 +13,9 @@ class Config {
         Config() = default;
         ~Config();
 
-        void load(const std::string& file_path);
+        void Load(const std::string& file_path);
         std::string operator[](const std::string& key) const;
-        int getInt(const std::string& key) const;
+        int GetInt(const std::string& key) const;
 };
 
 #endif // CONFIG_H_

@@ -6,8 +6,8 @@
 
 class Log {
     public:
-        static void write(std::string message);
-        static void write(sf::Vector2f value);
+        static void Write(std::string message);
+        static void Write(sf::Vector2f value);
 };
 
 #endif // LOG_H_
