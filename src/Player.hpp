@@ -10,10 +10,9 @@ class Game;
 class Player : public GameObject {
     private:
         sf::Vector2f velocity_;
-        std::string texture_location_;
 
     public:
-        Player(const std::string texture_location, const sf::Vector2f position, const sf::Vector2f size);
+        Player(const sf::Vector2f position, const sf::Vector2f size);
         ~Player() = default;
 
         void Tick() noexcept;
@@ -22,7 +21,6 @@ class Player : public GameObject {
         void MoveRight() noexcept;
         void Jump() noexcept;
 
-        std::string GetTextureLocation() const noexcept;
 };
 
 #endif // PLAYER_H_

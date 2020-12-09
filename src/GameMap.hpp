@@ -14,8 +14,8 @@ class GameMap {
         Player* player_;
 
         static sf::Vector2f PositionByIndex(
-            const size_t& i,
-            const size_t& j,
+            const size_t& x,
+            const size_t& y,
             const float& tile_width = 30.f,
             const float& tile_height = 30.f) noexcept;
 
@@ -25,6 +25,7 @@ class GameMap {
 
         void Load();
         Player* GetPlayer() const noexcept;
+        std::vector<GameObject*> GetGameObjects() const noexcept;
 };
 
 #endif // GAME_MAP_H_
