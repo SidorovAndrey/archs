@@ -23,7 +23,7 @@ class Display {
         ~Display();
 
         void Start(const Player& player, const std::vector<GameObject*>& map);
-        void Tick(Player& player);
+        void Tick(Player& player, const std::vector<GameObject*>& map);
 
         bool IsOpen() const noexcept;
 };

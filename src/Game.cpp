@@ -22,7 +22,7 @@ void Game::Run() {
     display.Start(*player, map_objects);
 
     while (display.IsOpen()) {
-        display.Tick(*player);
+        display.Tick(*player, map_objects);
     }
 }
 

@@ -12,9 +12,6 @@ class Game {
         Config* config_;
 
     public:
-        const int x_screen_size = 1200;
-        const int y_screen_size = 700;
-
         Game();
         ~Game();
 

@@ -1,3 +1,4 @@
+#include "Controller.hpp"
 #include "Display.hpp"
 
 Display::Display() {
@@ -44,24 +45,13 @@ void Display::Start(const Player& player, const std::vector<GameObject*>& map) {
     }
 }
 
-void Display::Tick(Player& player) {
+void Display::Tick(Player& player, const std::vector<GameObject*>& map) {
     sf::Event event;
     while (window_->pollEvent(event)) {
         if (event.type == sf::Event::Closed)
             window_->close();
 
-        // TODO: come up with idea how I can pass events to player
-        if (event.type == sf::Event::KeyPressed) {
-           if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-               player.MoveRight();
-
-           if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-               player.MoveLeft();
-
-           if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-               player.Jump();
-
-       }
+        Controller::HandleInput(event, player, map);
    }
 
     player.Tick();

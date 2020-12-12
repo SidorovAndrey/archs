@@ -25,7 +25,7 @@ void GameMap::Load() {
         for (size_t x = 0; x < buff.size(); ++x) {
             if (buff[x] == 'p') {
                 sf::Vector2f position = GameMap::PositionByIndex(x, y);
-                sf::Vector2f size(30.f, 30.f);
+                sf::Vector2f size(29.f, 29.f);
                 player_->SetPosition(position);
                 player_->SetSize(size);
             }
