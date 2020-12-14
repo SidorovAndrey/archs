@@ -11,10 +11,10 @@
 
 class Controller {
     private:
-        static bool CollideWithMap(const std::vector<GameObject*>& map, const sf::Vector2f& position, const sf::Vector2f& size) noexcept;
+        static bool CollideWithMap(const std::vector<GameObject>& map, const sf::Vector2f& position, const sf::Vector2f& size) noexcept;
 
     public:
-        static void HandleInput(const sf::Event& event, Player& player, const std::vector<GameObject*>& map);
+        static void HandleInput(const sf::Event& event, Player& player, const std::vector<GameObject>& map);
 };
 
 #endif // CONTROLLER_H_

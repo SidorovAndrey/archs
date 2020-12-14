@@ -7,12 +7,9 @@
 
 class Config {
     private:
-        std::map<std::string, std::string>* values_;
+        std::map<std::string, std::string> values_;
 
     public:
-        Config() = default;
-        ~Config();
-
         void Load(const std::string& file_path);
         std::string operator[](const std::string& key) const;
         int GetInt(const std::string& key) const;

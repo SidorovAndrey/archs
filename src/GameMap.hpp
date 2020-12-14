@@ -1,6 +1,7 @@
 #ifndef GAME_MAP_H_
 #define GAME_MAP_H_
 
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -9,9 +10,8 @@
 
 class GameMap {
     private:
-        // I don't know how should I store map_objects_ and player_. For now, gonna keep them as pointers
-        std::vector<GameObject*> map_objects_;
-        Player* player_;
+        std::vector<GameObject> map_objects_;
+        std::unique_ptr<Player> player_;
 
         static sf::Vector2f PositionByIndex(
             const size_t& x,
@@ -21,11 +21,10 @@ class GameMap {
 
     public:
         GameMap();
-        ~GameMap();
 
         void Load();
-        Player* GetPlayer() const noexcept;
-        std::vector<GameObject*> GetGameObjects() const noexcept;
+        Player& GetPlayer() const noexcept;
+        std::vector<GameObject> GetGameObjects() const noexcept; // guess that compiler has Return Value Optimization and handles it wihout copy, better disassemble it and check it
 };
 
 #endif // GAME_MAP_H_

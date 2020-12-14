@@ -4,13 +4,7 @@
 #include "GameMap.hpp"
 
 GameMap::GameMap() {
-    player_ = new Player(sf::Vector2f(), sf::Vector2f());
-}
-
-GameMap::~GameMap() {
-    delete player_;
-    for (size_t i = 0; i < map_objects_.size(); ++i)
-        delete map_objects_[i];
+    player_ = std::make_unique<Player>(sf::Vector2f(), sf::Vector2f());
 }
 
 void GameMap::Load() {
@@ -33,7 +27,7 @@ void GameMap::Load() {
             if (buff[x] == 'g') {
                 sf::Vector2f position = GameMap::PositionByIndex(x, y);
                 sf::Vector2f size(30.f, 30.f);
-                GameObject* obj = new GameObject(GameObjectType::Ground, position, size);
+                GameObject obj(GameObjectType::Ground, position, size);
                 map_objects_.push_back(obj);
             }
         }
@@ -50,10 +44,10 @@ sf::Vector2f GameMap::PositionByIndex(
     return result;
 }
 
-Player* GameMap::GetPlayer() const noexcept {
-    return player_;
+Player& GameMap::GetPlayer() const noexcept {
+    return *player_;
 }
 
-std::vector<GameObject*> GameMap::GetGameObjects() const noexcept {
+std::vector<GameObject> GameMap::GetGameObjects() const noexcept {
     return map_objects_;
 }

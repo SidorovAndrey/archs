@@ -1,6 +1,7 @@
 #ifndef GAME_H_
 #define GAME_H_
 
+#include <memory>
 #include <vector>
 
 #include "Config.hpp"
@@ -8,12 +9,11 @@
 
 class Game {
     private:
-        GameMap* game_map_;
-        Config* config_;
+        std::unique_ptr<GameMap> game_map_;
+        std::unique_ptr<Config> config_;
 
     public:
         Game();
-        ~Game();
 
         void Run();
 };

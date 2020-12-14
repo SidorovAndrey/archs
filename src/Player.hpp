@@ -13,7 +13,6 @@ class Player : public GameObject {
 
     public:
         Player(const sf::Vector2f position, const sf::Vector2f size);
-        ~Player() = default;
 
         void Tick() noexcept;
 

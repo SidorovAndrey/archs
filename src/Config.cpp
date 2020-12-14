@@ -5,8 +5,7 @@
 #include "Log.hpp"
 
 void Config::Load(const std::string& file_path) {
-    delete values_;
-    values_ = new std::map<std::string, std::string>();
+    values_.clear();
 
     std::fstream file;
     file.open(file_path, std::ios::in);
@@ -19,20 +18,12 @@ void Config::Load(const std::string& file_path) {
         std::string key = buff.substr(0, separator);
         std::string value = buff.substr(separator + 1);
 
-        (*values_)[key] = value;
+        values_[key] = value;
     }
 }
 
-Config::~Config() {
-    delete values_;
-}
-
 std::string Config::operator[](const std::string& key) const {
-    std::string value = (*values_)[key];
-    if (value.empty())
-        throw std::out_of_range("Cannot find config value by key: " + key);
-
-    return value;
+    return values_.at(key);
 }
 
 int Config::GetInt(const std::string& key) const {
